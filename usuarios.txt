@@ -1,0 +1,9 @@
+Usuario, Senha, Tipo
+Alysson, 123, Anfitriao
+aline, 91393494, Hospede
+breno, 1334, Hospede
+ksadkd, 213, Anfitriao
+louco, 0, Hospede
+bolsonaro, 13, Anfitriao
+milei, 9128, Hospede
+lula, 13, Hospede
