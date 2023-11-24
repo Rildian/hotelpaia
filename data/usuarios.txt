@@ -7,3 +7,4 @@ louco, 0, Hospede
 bolsonaro, 13, Anfitriao
 milei, 9128, Hospede
 lula, 13, Hospede
+23, 12303, Hospede
