@@ -19,44 +19,46 @@ void lerArquivos(Lista *l)
 {
     // Iniciar arquivos necessarios
     // Criar pasta
-    if (mkdir(path, S_IRWXU) == 0) 
+    if (mkdir(path, S_IRWXU) == 0)
     {
         printf("Pasta data criada.\n");
-    } 
-    else 
+    }
+    else
     {
-        if (errno != EEXIST) 
+        if (errno != EEXIST)
         {
             fprintf(stderr, "Erro ao criar a pasta.\n");
             exit(EXIT_FAILURE);
         }
     }
-    
+
     // Usuarios
     FILE *arq = fopen(usuariosPath, "r");
-    if (arq == NULL) {
+    if (arq == NULL)
+    {
         arq = fopen(usuariosPath, "w");
-        if (arq == NULL) {
+        if (arq == NULL)
+        {
             fprintf(stderr, "Erro ao criar o arquivo.\n");
             exit(EXIT_FAILURE);
         }
         fprintf(arq, "Usuario, Senha, Tipo\n");
         fclose(arq);
-    } 
-    else 
+    }
+    else
     {
         // Se o arquivo existe, iremos ler para formar uma lista encadeada
         char buffer[1024];
-        
+
         // Descartar primeira linha
-        // Se eh nulo tem nada ou deu erro 
-        if (fgets(buffer, sizeof(buffer), arq) == NULL) 
+        // Se eh nulo tem nada ou deu erro
+        if (fgets(buffer, sizeof(buffer), arq) == NULL)
         {
             fclose(arq);
-            return;  
+            return;
         }
 
-        while (fgets(buffer, sizeof(buffer), arq) != NULL) 
+        while (fgets(buffer, sizeof(buffer), arq) != NULL)
         {
             char usuario[50];
             char senha[50];
@@ -71,17 +73,16 @@ void lerArquivos(Lista *l)
     }
 }
 
-
 bool cadastrar(Lista *l, char *nome, char *tipo, int senha)
 {
-    FILE *arq  = fopen(usuariosPath, "a");
+    FILE *arq = fopen(usuariosPath, "a");
 
     if (arq == NULL)
     {
         fprintf(stderr, "Nao conseguiu abrir o arquivo :(.\n)");
         return false;
     }
-    
+
     if (strcmp(tipo, "Hospede") == 0)
         fprintf(arq, "%s, %d, %s\n", nome, senha, tipo);
     else if (strcmp(tipo, "Anfitriao") == 0)
@@ -107,7 +108,8 @@ bool deletar(char *nome, int s)
     bool usuarioEncontrado = false;
 
     char buffer[1024];
-    while (fgets(buffer, sizeof(buffer), arq) != NULL) {
+    while (fgets(buffer, sizeof(buffer), arq) != NULL)
+    {
         char usuario[50];
         char senha[50];
         char tipo[50];
@@ -121,14 +123,13 @@ bool deletar(char *nome, int s)
         }
 
         fprintf(tmp, "%s,%s,%s", usuario, senha, tipo);
-
     }
 
     fclose(arq);
     fclose(tmp);
-    
+
     // Temporario vira o novo /data/usuarios.txt
-    if (remove(usuariosPath) != 0 || rename(usuariosTempPath, usuariosPath) != 0) 
+    if (remove(usuariosPath) != 0 || rename(usuariosTempPath, usuariosPath) != 0)
     {
         fprintf(stderr, "Erro ao substituir o arquivo.\n");
         exit(EXIT_FAILURE);
@@ -149,7 +150,7 @@ bool atualizar(Lista *l, char *nome, char *novoNome, int s, int novaSenha)
     bool usuarioEncontrado = false;
 
     char buffer[BUFFER_SIZE];
-    while (fgets(buffer, sizeof(buffer), arq) != NULL) 
+    while (fgets(buffer, sizeof(buffer), arq) != NULL)
     {
         char usuario[50];
         char senha[50];
@@ -165,14 +166,13 @@ bool atualizar(Lista *l, char *nome, char *novoNome, int s, int novaSenha)
         }
         else
             fprintf(tmp, "%s,%s,%s", usuario, senha, tipo);
-
     }
 
     fclose(arq);
     fclose(tmp);
-    
+
     // Temporario vira o novo /data/usuarios.txt
-    if (remove(usuariosPath) != 0 || rename(usuariosTempPath, usuariosPath) != 0) 
+    if (remove(usuariosPath) != 0 || rename(usuariosTempPath, usuariosPath) != 0)
     {
         fprintf(stderr, "Erro ao substituir o arquivo.\n");
         exit(EXIT_FAILURE);
