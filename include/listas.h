@@ -1,7 +1,7 @@
 #ifndef LISTAS_H
 #define LISTAS_H
 
-#include "structs.h" 
+#include "structs.h"
 
 Lista *criarLista();
 void inserir(Lista *l, char *nome, int senha, char *tipo);

@@ -18,13 +18,12 @@ int main(int argc, char **argv)
     imprimir(lista);
 }
 
-
 bool cadastro(Lista *l)
 {
     int opcao;
     printf("Digite 0 se deseja se cadastrar como hospede ou digite 1 para se cadastrar como anfitriao: \nDigita outro numero para parar :)\nOpcao: ");
-    scanf(" %d",&opcao);
-    
+    scanf(" %d", &opcao);
+
     if (opcao < 0 || opcao > 1)
         return false;
 
@@ -32,19 +31,17 @@ bool cadastro(Lista *l)
     printf("Usuário: ");
     scanf("%s", &pessoa.user);
     printf("Senha: ");
-    scanf("%d",&pessoa.senha);
+    scanf("%d", &pessoa.senha);
     printf("\n");
 
-
-    switch (opcao) {
-        case 0:
-            cadastrar(l, pessoa.user, "Hospede", pessoa.senha);
-            break;
-        case 1:
-            cadastrar(l, pessoa.user, "Anfitriao", pessoa.senha);
-            break;
+    switch (opcao)
+    {
+    case 0:
+        cadastrar(l, pessoa.user, "Hospede", pessoa.senha);
+        break;
+    case 1:
+        cadastrar(l, pessoa.user, "Anfitriao", pessoa.senha);
+        break;
     }
     return false;
-    
 }
-

@@ -10,7 +10,8 @@
 Lista *criarLista()
 {
     Lista *lista = malloc(sizeof(Lista));
-    if (lista == NULL) {
+    if (lista == NULL)
+    {
         fprintf(stderr, "Erro ao alocar memória para a lista.\n");
         exit(1);
     }
@@ -22,7 +23,7 @@ Lista *criarLista()
     return lista;
 }
 
-void inserir(Lista *l, char* nome, int senha, char *tipo)
+void inserir(Lista *l, char *nome, int senha, char *tipo)
 {
     Node *novo = malloc(sizeof(Node));
     if (novo == NULL)
@@ -30,10 +31,11 @@ void inserir(Lista *l, char* nome, int senha, char *tipo)
         printf("Deu erro :O !!\n");
         return;
     }
-    
+
     // Remover o \n de arquivos csv
     size_t tamanho = strlen(tipo);
-    if (tamanho > 0 && tipo[tamanho - 1] == '\n') {
+    if (tamanho > 0 && tipo[tamanho - 1] == '\n')
+    {
         tipo[tamanho - 1] = '\0';
     }
 
@@ -43,7 +45,7 @@ void inserir(Lista *l, char* nome, int senha, char *tipo)
     novo->pessoa.senha = senha;
 
     novo->prox = NULL;
-        
+
     // Se a lista estiver vazia
     if (l->inicio == NULL)
     {
@@ -52,7 +54,7 @@ void inserir(Lista *l, char* nome, int senha, char *tipo)
     }
     // Add fim
     else
-    {    
+    {
         l->fim->prox = novo;
         l->fim = novo;
     }
@@ -60,16 +62,16 @@ void inserir(Lista *l, char* nome, int senha, char *tipo)
     l->tamanho++;
 }
 
-void imprimir(Lista *l) {
+void imprimir(Lista *l)
+{
     int largura = TAMANHO - 20;
     printf("=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=\n");
     printf("| %-*s |  %s      |\n", largura, "Usuarios", "Tipo");
     printf("|--------------------------------|------------|\n");
 
-    
     Node *aux = l->inicio;
-    
-    while(aux != NULL) 
+
+    while (aux != NULL)
     {
         printf("| %-*s | %-*s |\n", largura, aux->pessoa.user, 10, aux->pessoa.tipo);
         aux = aux->prox;
@@ -99,7 +101,7 @@ void remover(Lista *l, char *nome, int senha)
     while (aux != NULL)
     {
         if (strcmp(aux->prox->pessoa.user, nome) == 0 && aux->prox->pessoa.senha == senha)
-        {   
+        {
             Node *lixo = aux->prox;
             // Fim
             if (aux->prox == l->fim)
@@ -130,14 +132,14 @@ void atualizarLista(Lista *l, char *nome, char *novoNome, int s, int novaSenha)
         printf("Vazia!\n");
         return;
     }
-    
+
     Node *aux = l->inicio;
 
     while (aux != NULL)
     {
         if (strcmp(aux->pessoa.user, nome) == 0 && aux->pessoa.senha == s)
         {
-            strncpy(aux->pessoa.user, novoNome, TAMANHO); 
+            strncpy(aux->pessoa.user, novoNome, TAMANHO);
             aux->pessoa.senha = novaSenha;
             return;
         }
