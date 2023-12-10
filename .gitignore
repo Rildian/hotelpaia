@@ -50,7 +50,10 @@ modules.order
 Module.symvers
 Mkfile.old
 dkms.conf
+<<<<<<< HEAD
 
 .vscode/*
 data/*
 programa
+=======
+>>>>>>> 359558d1c1c172e129a1d11564238349afb6da76
